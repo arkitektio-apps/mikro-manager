@@ -1,0 +1,47 @@
+fragment ExportStage on Stage {
+  name
+  positions {
+    name
+    id
+    x
+    z
+    y
+    omeros {
+      timepoints {
+        era {
+          name
+        }
+        deltaT
+      }
+      views {
+        
+      }
+      acquisitionDate
+      representation {
+        store
+        name
+        id
+        fileOrigins {
+          id
+          file
+        }
+        derived(flatten: 4) {
+          id
+          store
+          name
+          metrics {
+            id
+            key
+            value
+          }
+        }
+      }
+    }
+  }
+}
+
+query GetExportStage($id: ID!) {
+  stage(id: $id) {
+    ...ExportStage
+  }
+}
