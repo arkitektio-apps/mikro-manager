@@ -2,7 +2,7 @@ import PyInstaller.__main__
 import shutil
 
 
-APP_NAME = "MikroManager"
+app = "MikroManager"
 
 PyInstaller.__main__.run(
     [
@@ -10,7 +10,7 @@ PyInstaller.__main__.run(
         "--clean",
         "--windowed",
         "--onedir",
-        f"--name={APP_NAME}",
+        f"--name={app}",
         "--noconfirm",
         "--additional-hooks-dir=hooks",
     ]
