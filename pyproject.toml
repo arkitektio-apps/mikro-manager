@@ -9,9 +9,7 @@ packages = [{ include = "mikro_manager" }]
 [tool.poetry.dependencies]
 python = ">=3.8,<3.12"
 arkitekt = {version = "0.5.52", extras = ["all"]}
-tifffile = "^2023.4.12"
-tqdm = "^4.65.0"
-koil = "0.3.5"
+pycromanager = "^0.29.9"
 
 [tool.mypy]
 exclude = ["venv/"]
