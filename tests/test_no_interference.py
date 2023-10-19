@@ -1,7 +1,8 @@
-from mikro_manager.main import Gucker
+from mikro_manager.main import MMBridge
 import pytest
+
 
 @pytest.mark.qt
 def test_fetch_from_windowed_grant(qtbot):
-    widget = Gucker()
+    widget = MMBridge()
     qtbot.addWidget(widget)
