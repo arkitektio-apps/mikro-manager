@@ -61,10 +61,9 @@ class MikroManager(QtWidgets.QMainWindow):
                 self.magic_bar.process_state == ProcessState.PROVIDING
             )
         )
-        self.button = QtWidgets.QPushButton("Open Settings")
-        self.button.clicked.connect(self.on_open_settings)
-        self.exportbutton = QtWidgets.QPushButton("Take Control")
-        self.exportbutton.clicked.connect(self.on_take_control)
+        self.magic_bar.magicb.setDisabled(True)
+        self.button = QtWidgets.QPushButton("Connect")
+        self.button.clicked.connect(self.on_connect)
 
         self.statusBar = QtWidgets.QStatusBar()
         self.setStatusBar(self.statusBar)
@@ -73,7 +72,6 @@ class MikroManager(QtWidgets.QMainWindow):
         layout = QtWidgets.QVBoxLayout()
         layout.addWidget(self.center_label)
         layout.addWidget(self.button)
-        layout.addWidget(self.exportbutton)
         layout.addWidget(self.magic_bar)
         self.centralWidget.setLayout(layout)
         self.setCentralWidget(self.centralWidget)
@@ -87,12 +85,25 @@ class MikroManager(QtWidgets.QMainWindow):
         self.app.rekuest.register()(self.bridge.acquire_3d)
         self.setWindowTitle("Mikro-Manager")
 
+        self.connected = False
+        self.on_connect()
 
-    def on_open_settings(self):
-        print("Opening settings")
 
-    def on_take_control(self):
-        self.bridge.start()
+
+    def on_connect(self):
+        try:
+            self.bridge.start()
+            self.button.setText("Open Settings")
+            self.connected = True
+            self.magic_bar.magicb.setDisabled(False)
+        except:
+            self.button.setText("Re-Connect")
+            logger.error("Could not connect-to Mikro Manager", exc_info=True)
+            self.statusBar.showMessage("Could not connect to MicroManager. Is it running?")
+            self.connected = False
+            self.magic_bar.magicb.setDisabled(True)
+
+    
 
 
     

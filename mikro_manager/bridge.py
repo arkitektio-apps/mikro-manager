@@ -2,7 +2,7 @@ from pycromanager import Acquisition, Core, JavaObject, JavaClass
 import numpy as np
 from pycromanager import Studio
 import xarray as xr
-from mikro.api.schema import from_xarray, RepresentationFragment, ROIFragment, PositionFragment, StageFragment, create_stage, create_position, OmeroRepresentationInput, PhysicalSizeInput, ObjectiveFragment, create_objective, create_instrument, create_stage, PlaneInput, RepresentationViewInput, create_channel, ChannelFragment
+from mikro.api.schema import from_xarray, RepresentationFragment, ROIFragment, PositionFragment, StageFragment, create_stage, create_position, OmeroRepresentationInput, PhysicalSizeInput, ObjectiveFragment, create_objective, get_objective, create_instrument, create_stage, PlaneInput, RepresentationViewInput, create_channel, ChannelFragment
 import time
 from koil.vars import check_cancelled
 from typing import Optional, List
@@ -96,6 +96,9 @@ class MMBridge:
 
         print(x, y, z)
 
+        if not self.active_stage:
+            self.active_stage = create_stage(name="New Stage")
+
         self.active_position = create_position(stage=self.active_stage, x=x, y=y, z=z)
 
         return self.active_position
@@ -110,14 +113,21 @@ class MMBridge:
             _description_
         """
         prop = self.core.get_current_config(self.objective_config)
-        self.active_objective = create_objective(serial_number=f"mmm:{prop}", name=prop, magnification=60) #TODO: Read out from config
+
+        try: 
+            objective = get_objective(name=prop)
+        except:
+            objective = create_objective(serial_number=f"{prop}", name=prop, magnification=60) #TODO: Read out from config
+
+        
+        self.active_objective = objective
         return self.active_objective
 
     def get_current_channel(self):
         """Get the current channel"""
 
         prop = self.core.get_current_config(self.channel_config)
-        self.active_channel = create_channel(serial_number=f"mmm:{prop}", name=prop, magnification=60) #TODO: Read out from config
+        self.active_channel = create_channel(name=f"{prop}") #TODO: Read out from config
         return prop
     
     def snap_image(self) -> xr.DataArray:
@@ -159,18 +169,23 @@ class MMBridge:
 
 
     def ensure_focus(self):
-
-        dev = self.core.get_auto_focus_device()
-        self.core.set_property(dev, "FocusMaintenance", "On")
-        while not self.core.is_continuous_focus_locked():
-            print("Not locked, sleeping")
-            check_cancelled()
-            time.sleep(0.01)
+        try:
+            dev = self.core.get_auto_focus_device()
+            self.core.set_property(dev, "FocusMaintenance", "On")
+            while not self.core.is_continuous_focus_locked():
+                print("Not locked, sleeping")
+                check_cancelled()
+                time.sleep(0.01)
+        except:
+            pass
 
 
     def detach_pfs(self):
-        dev = self.core.get_auto_focus_device()
-        self.core.set_property(dev, "FocusMaintenance", "Off")
+        try:
+            dev = self.core.get_auto_focus_device()
+            self.core.set_property(dev, "FocusMaintenance", "Off")
+        except:
+            pass
 
 
     def set_objective(self, objective: ObjectiveFragment, ensure_focus: bool = True) -> None:
@@ -238,6 +253,8 @@ class MMBridge:
             )
 
         self.core.clear_circular_buffer()
+
+        return from_xarray(image_array, name="Test image", omero=omero)
 
 
     def ensure_environment(self, position: Optional[PositionFragment], objective: Optional[ObjectiveFragment], channel: Optional[ChannelFragment]):
