@@ -1546,22 +1546,21 @@ files = [
 
 [[package]]
 name = "pycromanager"
-version = "0.29.9"
+version = "0.27.5"
 description = "Open source microscope control using python"
 category = "main"
 optional = false
 python-versions = ">=3.6"
 files = [
-    {file = "pycromanager-0.29.9-py3-none-any.whl", hash = "sha256:f10189b4880c651f0e50b0376c421a146c11c7736722c40cfc74adc7766f8893"},
-    {file = "pycromanager-0.29.9.tar.gz", hash = "sha256:98246bbd00b680a88e62c51ead3987aa3880da59cb606b9bfc078fea055f43ac"},
+    {file = "pycromanager-0.27.5-py3-none-any.whl", hash = "sha256:300987a2f25b3081c97d333f9d5a978e1d41daad6f20d04ad1216aa23b0ee228"},
+    {file = "pycromanager-0.27.5.tar.gz", hash = "sha256:021ecb4e892badc2f0b4730c493a9cbe799468430ea1483ed3daf8b929b4facc"},
 ]
 
 [package.dependencies]
 dask = {version = ">=2022.2.0", extras = ["array"]}
 docstring-inheritance = "*"
-ndtiff = ">=2.2.0"
+ndtiff = ">=2.0.0"
 numpy = "*"
-pymmcore = "*"
 pyzmq = "*"
 
 [package.extras]
@@ -1680,37 +1679,6 @@ files = [
     {file = "pyinstaller-hooks-contrib-2023.10.tar.gz", hash = "sha256:4b4a998036abb713774cb26534ca06b7e6e09e4c628196017a10deb11a48747f"},
     {file = "pyinstaller_hooks_contrib-2023.10-py2.py3-none-any.whl", hash = "sha256:6dc1786a8f452941245d5bb85893e2a33632ebdcbc4c23eea41f2ee08281b0c0"},
 ]
-
-[[package]]
-name = "pymmcore"
-version = "10.4.0.71.0"
-description = "Python bindings for MMCore, Micro-Manager's device control layer"
-category = "main"
-optional = false
-python-versions = ">=3.6"
-files = [
-    {file = "pymmcore-10.4.0.71.0-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:03a6f488ae4b02672d7a3321f22508c5607afee2d24176b39d7174f0c6f1ec13"},
-    {file = "pymmcore-10.4.0.71.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:1590c9e53dbe453ef464be5c549d758ebee77696340a8efe73dc6dc5746ad725"},
-    {file = "pymmcore-10.4.0.71.0-cp310-cp310-win_amd64.whl", hash = "sha256:d9eb2c15e12f22a88e98071d3aed05138f97677518372cb1de1c12b5c162032d"},
-    {file = "pymmcore-10.4.0.71.0-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:e5a13a7f995d8f06080ccf9651f9a06796325ae5ccbb2e8026c9777656925be2"},
-    {file = "pymmcore-10.4.0.71.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:796d9c43e21909981c06e53ab91376039e89094994dab6f0bb148e6853df794a"},
-    {file = "pymmcore-10.4.0.71.0-cp311-cp311-win32.whl", hash = "sha256:853144d48f35f7e90c76d008597635f9a9dca165a30cbd60dd08e32362519154"},
-    {file = "pymmcore-10.4.0.71.0-cp311-cp311-win_amd64.whl", hash = "sha256:6962445a18e3eecc17dd687cc027c4d8a6c24a689b333804f911f63a2edb04a2"},
-    {file = "pymmcore-10.4.0.71.0-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:2f55d69e5aca365f3ce6a7fc6b7f1659d41ca822449a2f3e293394ff01ffde6d"},
-    {file = "pymmcore-10.4.0.71.0-cp38-cp38-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:822b42a2498feb53c4fa69f4b10c6fe06430663f60c9de552a59382ea7cbc126"},
-    {file = "pymmcore-10.4.0.71.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:e01aa7e6bf8f4a8cb2c79dbf8d661ddd75151dbd2084a8a4a616486e2311c150"},
-    {file = "pymmcore-10.4.0.71.0-cp38-cp38-win32.whl", hash = "sha256:6e5f2ec0a123229c6cee9fc7ccfe8652de2e2e18c33155f17361a4bd186ac4c9"},
-    {file = "pymmcore-10.4.0.71.0-cp38-cp38-win_amd64.whl", hash = "sha256:db805b14bb82729f2d446be8900ea05502576763f583f28b62841acb2e56ebb9"},
-    {file = "pymmcore-10.4.0.71.0-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:5a95cacd27d4d663baafbcdd486d27c457c813a7b6fb4eb0619ab757ace3e61a"},
-    {file = "pymmcore-10.4.0.71.0-cp39-cp39-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:41463de05f9fd47f606797e328c87b29f11528316fdd6c44921bf75a7ca38a9b"},
-    {file = "pymmcore-10.4.0.71.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:b9dff2ae68dbc84d982781195fa1d9975230c625a28e9434689b70857fea0dab"},
-    {file = "pymmcore-10.4.0.71.0-cp39-cp39-win32.whl", hash = "sha256:48e71ac3875e701669c505629fdeb6c717fba2904d8d1b7232f596487292e09a"},
-    {file = "pymmcore-10.4.0.71.0-cp39-cp39-win_amd64.whl", hash = "sha256:fadd911357f37cf7bb802232a222b9fd5a4367b60d76e2f9ccb658829b90b64d"},
-    {file = "pymmcore-10.4.0.71.0.tar.gz", hash = "sha256:e7be22b922f22085a90a7d48282a60dcdb85cacdd9bf73b9e70ce3d1708c52c9"},
-]
-
-[package.dependencies]
-numpy = ">=1.12.0"
 
 [[package]]
 name = "pytest"
@@ -2702,4 +2670,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8,<3.12"
-content-hash = "805ba6258f0f6e5de85599c34a0c5b376d8dd5d20a16e69bd20b35767a1037f0"
+content-hash = "9b073b6c83123a14c996c2eaa420d58b87d0affe75413ac9f543e721c0b04b54"
