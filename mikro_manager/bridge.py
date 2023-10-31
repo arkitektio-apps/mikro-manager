@@ -130,13 +130,15 @@ class MMBridge:
         self.active_channel = create_channel(name=f"{prop}") #TODO: Read out from config
         return prop
     
-    def snap_image(self) -> xr.DataArray:
-        """Snaps an image and returns it as a numpy array
+    def snap_image(self, name: Optional[str] = "Snapped Image") -> RepresentationFragment:
+        """Snap Image 
+        
+        Snaps an image and returns it as ne image
 
         Returns
         -------
-        _type_
-            _description_
+        RepresentationFragment
+            The snapped image
         """
         self.core.snap_image()
         tagged_image = self.core.get_tagged_image()
@@ -145,7 +147,7 @@ class MMBridge:
                 newshape=[1, tagged_image.tags["Height"], tagged_image.tags["Width"]],
             )
 
-        return xr.DataArray(image_array, dims=["z", "y", "x"])
+        return from_xarray(xr.DataArray(image_array, dims=["z", "y", "x"]), name=name )
     
 
     def move_to_position_xy(self, position: PositionFragment):
@@ -189,7 +191,7 @@ class MMBridge:
 
 
     def set_objective(self, objective: ObjectiveFragment, ensure_focus: bool = True) -> None:
-        """MM Set Objective
+        """Set Objective
 
         Set the active objective"""
         if self.active_objective == objective:
@@ -207,7 +209,7 @@ class MMBridge:
         self.active_objective = objective
 
     def set_channel(self, channel: Optional[ChannelFragment]) -> None:
-        """MM Set Channel
+        """Set Channel
 
         Set the active channel"""
 
@@ -217,10 +219,17 @@ class MMBridge:
 
     
     def acquire_2d(self, position: Optional[PositionFragment], objective: Optional[ObjectiveFragment], channel: Optional[ChannelFragment]) -> RepresentationFragment:
-        """ Acquire 2D (with offset)
+        """ Acquire 2D
 
-        Acquire a 2D snap of an image  (with offset)
+        Acquire a 2D image 
 
+        Args:
+            position (Optional[PositionFragment]): The position to move to
+            objective (Optional[ObjectiveFragment]): The objective to use
+            channel (Optional[ChannelFragment]): The channel to use
+
+        Returns:
+            RepresentationFragment: The image
 
         """
 
@@ -286,10 +295,11 @@ class MMBridge:
     def acquire_3d(self, position: Optional[PositionFragment], objective: Optional[ObjectiveFragment], channel: Optional[ChannelFragment], z_steps: int = 2, z_step: float = 0.3, crop_physical_height: Optional[float] = None, crop_physical_width: Optional[float] = None) -> RepresentationFragment:
         """Acquire Stack
 
-        acquire a 3d stack
+        Acquire a 3D image stack, allowing to move to a new Position, setting 
+        an Objective, and an active channel.
 
         Args:
-            position (Optional[PositionFragment]): The postion
+            position (Optional[PositionFragment]): The position to move to
             objective (Optional[ObjectiveFragment]): The objective to use
             channel (Optional[ChannelFragment]): The channel to use
             auto_focus_offset (Optional[int]): A temporaty autofocus offset
@@ -298,7 +308,7 @@ class MMBridge:
 
         Returns:
             RepresentationFragment: The image
-        """    """"""
+        """ 
 
         position, objective, channel = self.ensure_environment(position, objective, channel)
 
