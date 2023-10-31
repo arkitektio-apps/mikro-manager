@@ -426,7 +426,7 @@ class MMBridge:
 
     
     def retrieve_positions(self) -> List[PositionFragment]:
-        """MM Retrieve Positions
+        """Retrieve Positions
 
         retrieves positions within a stage context established
         right here

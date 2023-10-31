@@ -83,6 +83,9 @@ class MikroManager(QtWidgets.QMainWindow):
         self.app.rekuest.register()(self.bridge.snap_image)
         self.app.rekuest.register()(self.bridge.acquire_2d)
         self.app.rekuest.register()(self.bridge.acquire_3d)
+        self.app.rekuest.register()(self.bridge.retrieve_positions)
+        self.app.rekuest.register()(self.bridge.move_to_position_xy)
+        self.app.rekuest.register()(self.bridge.set_auto_focusoffset)
         self.setWindowTitle("Mikro-Manager")
 
         self.connected = False
