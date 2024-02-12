@@ -22,6 +22,10 @@ exclude = ["venv/"]
 ignore_missing_imports = true
 
 
+[tool.poetry.scripts]
+mikro-manager = "mikro_manager.main:main"
+
+
 [tool.ruff]
 extend-select = ["ANN", "D1"]
 ignore = ["ANN101", "D107", "D106", "ANN002", "ANN003"]
@@ -49,6 +53,8 @@ exclude = [
     "venv",
     "tests",
 ]
+
+
 
 # Same as Black.
 line-length = 100
