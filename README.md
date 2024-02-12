@@ -7,7 +7,6 @@
 [![PyPI pyversions](https://img.shields.io/pypi/pyversions/gucker.svg)](https://pypi.python.org/pypi/gucker/)
 [![PyPI status](https://img.shields.io/pypi/status/gucker.svg)](https://pypi.python.org/pypi/gucker/)
 
-mikro-manager proivides an interaction layer between arkitekt and micro-manager
+mikro-manager proivides an interaction layer between an Arkitekt Server and micro-manager
 
-# DEVELOPMENT
 
