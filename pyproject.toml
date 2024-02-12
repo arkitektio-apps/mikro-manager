@@ -8,7 +8,13 @@ packages = [{ include = "mikro_manager" }]
 
 [tool.poetry.dependencies]
 python = ">=3.8,<3.12"
-arkitekt = {version = "0.5.52", extras = ["all"]}
+arkitekt = {version = "0.7.8",  extras = [
+    "reaktion",
+    "rekuest",
+    "mikro",
+    "fluss",
+    "unlok"
+]}
 pycromanager = "0.27.5"
 
 [tool.mypy]
